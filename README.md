@@ -35,20 +35,32 @@ There are multiple versions of GAN adaptation to time series tasks, I'm using Ti
 ## Results
 <br>For each of the architectures, LSTM-based and TimeGAN, two models have been constructed, one using historical data only and one including all the financial and economic data that was collected. Note that dependent variable has been log transformed and all the metrics and figures are derived from the transformed variable.
 <br>*Univariate LSTM*
-<br>Actual vs Predicted: <img src="utils/LSTM_univar_p1.png"><img src="utils/LSTM_univar_p2.png"><img src="utils/LSTM_univar_p3.png"><img src="utils/LSTM_univar_p4.png">
-<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') <img src="utils/LSTM_univar_co1.png"><img src="utils/LSTM_univar_co2.png">
-<br>PCA decomposition: <img src="utils/LSTM_univar_PCAtest.png">
+<br>Actual vs Predicted: 
+<br><img src="utils/LSTM_univar_p1.png"><img src="utils/LSTM_univar_p2.png"><img src="utils/LSTM_univar_p3.png"><img src="utils/LSTM_univar_p4.png">
+<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') 
+<br><img src="utils/LSTM_univar_co1.png"><img src="utils/LSTM_univar_co2.png">
+<br>PCA decomposition: 
+<br><img src="utils/LSTM_univar_PCAtest.png">
 <br>*Multivariate LSTM*
-<br>Actual vs Predicted: <img src="utils/LSTM_multivar_p1.png"><img src="utils/LSTM_multivar_p2.png"><img src="utils/LSTM_multivar_p3.png"><img src="utils/LSTM_multiivar_p4.png">
-<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') <img src="utils/LSTM_multivar_co1.png"><img src="utils/LSTM_multivar_co2.png">
-<br>PCA decomposition: <img src="utils/LSTM_multivar_PCAtest.png">
+<br>Actual vs Predicted: 
+<br><img src="utils/LSTM_multivar_p1.png"><img src="utils/LSTM_multivar_p2.png"><img src="utils/LSTM_multivar_p3.png"><img src="utils/LSTM_multiivar_p4.png">
+<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') 
+<br><img src="utils/LSTM_multivar_co1.png"><img src="utils/LSTM_multivar_co2.png">
+<br>PCA decomposition: 
+<br><img src="utils/LSTM_multivar_PCAtest.png">
 <br>*Univariate TimeGAN*
-<br>Actual vs Predicted: <img src="utils/GAN_univar_p1.png"><img src="utils/GAN_univar_p2.png"><img src="utils/GAN_univar_p3.png"><img src="utils/GAN_univar_p4.png">
-<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') <img src="utils/GAN_univar_co1.png"><img src="utils/GAN_univar_co2.png">
-<br>PCA decomposition: <img src="utils/GAN_univar_PCAtest.png">
+<br>Actual vs Predicted: 
+<br><img src="utils/GAN_univar_p1.png"><img src="utils/GAN_univar_p2.png"><img src="utils/GAN_univar_p3.png"><img src="utils/GAN_univar_p4.png">
+<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') 
+<br><img src="utils/GAN_univar_co1.png"><img src="utils/GAN_univar_co2.png">
+<br>PCA decomposition: 
+<br><img src="utils/GAN_univar_PCAtest.png">
 <br>*Multivariate TimeGAN*
-<br>Actual vs Predicted: <img src="utils/GAN_multivar_p1.png"><img src="utils/GAN_multivar_p2.png"><img src="utils/GAN_multivar_p3.png"><img src="utils/GAN_multivar_p4.png">
-<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') <img src="utils/GAN_multivar_co1.png"><img src="utils/GAN_multivar_co2.png">
+<br>Actual vs Predicted: 
+<br><img src="utils/GAN_multivar_p1.png"><img src="utils/GAN_multivar_p2.png"><img src="utils/GAN_multivar_p3.png"><img src="utils/GAN_multivar_p4.png">
+<br>Model performance examples ('Henry Schein INC', 'Universal Electronics INC') 
+<br><img src="utils/GAN_multivar_co1.png"><img src="utils/GAN_multivar_co2.png">
+<br>PCA decomposition: 
 <br><img src="utils/GAN_multivar_PCAtest.png">
 <br>*Comparison*
 <br><img src="utils/compare_models.png">
