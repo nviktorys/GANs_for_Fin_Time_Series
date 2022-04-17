@@ -15,6 +15,7 @@
 <br>Adam optimizer is used for gradient update.
 <br>Loss functions - combination of Binary Cross Entropy, Mean absolute and squared erros.
 <br>Three types of activation functions are used: linear, sigmoid and tanh.
+<br>Evaluation. The models diversity compared visually with PCA decomposition and t-SNE. Frechet Inception Distance (FID) used to measure fidelity - how close generated data follows the real time-series. Usefulness of models measured in terms of difference between generated and real data with RMSE and MAE.
 <br>To deal with overfitting I used early stopping, dropout layers and L2 regularisation.
 
 ### LSTM
@@ -23,8 +24,39 @@
 <br><img src="utils/LSTM_vector.png"> <img src="utils/LSTM_autoencoder.png"> 
 
 ### GANs
-<br>GAN is a framework developed in 2014 to generate realistic synthetic data. While initially it was designed for image generation the model has evolved to be applied to other areas including time series. The key feature of GANs is in having two models, generator and discriminator, competing in a zero-sum game. There are multiple versions of GAN adaptation to time series tasks, I'm using TimeGAN variation (%%html
-<a href="https://papers.nips.cc/paper/2019/hash/c9efe5f26cd17ba6216bbe2a7d26d490-Abstract.html">Jinsung Yoon, 2019t</a>) of GAN architecture for this project.
-<br>
+<br>GAN is a framework developed in 2014 to generate realistic synthetic data. While initially it was designed for image generation the model has evolved to be applied to other areas including time series. The key feature of GANs is in having two models, generator and discriminator, competing in a zero-sum game. 
+There are multiple versions of GAN adaptation to time series tasks, I'm using TimeGAN variation (by Jinsung Yoon, 2019) of GAN architecture for this project. The network architecture is shown below (from original <a href="https://papers.nips.cc/paper/2019/hash/c9efe5f26cd17ba6216bbe2a7d26d490-Abstract.html">paper</a>)
+<br><img src="utils/TimeGANarchitecture.png">
+<br>Some modifications to the original architecture have been made. 
+<br>LSTM layers in all of the TimeGAN components (embedding, recovery, generator and discriminator) with tanh activation function in the inner layers. 
+<br>During training the series are normally split into a fixed size batches. Given that the data consists of company specific series of varying length a different approach of varying batch size has been taken. In this version the training loop has been amended to change batch size so it only includes series from one company within a batch. It's assumed that this training set up will improve optimization as loss would be updated over more homogenous data.
+<br>Another modification has been made to add conditioning on additional information while learning distribution of one series. The conditioning has been added to the embedder, generator and discriminator. Unlike regular LSTM, along with condition data, such as historic series, TimeGAN also uses array of real data for embedder, random data for generator and embedded output for discriminator. Those inputs have the same dimensions as the forecast output, four time steps in our case, while the rest of the conditional data have eight time steps. To align the dimensions and merge those inputs together I'm be using an encoder-decoder transformation to reduce dimensions of conditional data. 
+
+## Results
+<br>For each of the architectures, LSTM-based and TimeGAN, two models have been constructed, one using historical data only and one including all the financial and economic data that was collected. Note that dependent variable has been log transformed and all the metrics and figures are derived from the transformed variable.
+<br>*Univariate LSTM*
+<br><img src="utils/LSTM_univar_p1.png"><img src="utils/LSTM_univar_p2.png"><img src="utils/LSTM_univar_p3.png"><img src="utils/LSTM_univar_p4.png">
+<br><img src="utils/LSTM_univar_co1.png"><img src="utils/LSTM_univar_co2.png">
+<br><img src="utils/LSTM_univar_PCAtest.png">
+<br>*Multivariate LSTM*
+<br><img src="utils/LSTM_multiivar_p1.png"><img src="utils/LSTM_multiivar_p2.png"><img src="utils/LSTM_multiivar_p3.png"><img src="utils/LSTM_multiivar_p4.png">
+<br><img src="utils/LSTM_multiivar_co1.png"><img src="utils/LSTM_multiivar_co2.png">
+<br><img src="utils/LSTM_multiivarr_PCAtest.png">
+<br>*Univariate TimeGAN*
+<br><img src="utils/GAN_univar_p1.png"><img src="utils/GAN_univar_p2.png"><img src="utils/GAN_univar_p3.png"><img src="utils/GAN_univar_p4.png">
+<br><img src="utils/GAN_univar_co1.png"><img src="utils/GAN_univar_co2.png">
+<br><img src="utils/GAN_univar_PCAtest.png">
+<br>*Multivariate TimeGAN*
+<br><img src="utils/GAN_multiivar_p1.png"><img src="utils/GAN_multiivar_p2.png"><img src="utils/GAN_multiivar_p3.png"><img src="utils/GAN_multiivar_p4.png">
+<br><img src="utils/GAN_multiivar_co1.png"><img src="utils/GAN_multiivar_co2.png">
+<br><img src="utils/GAN_multiivarr_PCAtest.png">
+<br>*Comparison*
+<br><img src="utils/compare_models.png">
+<br><img src="utils/compare_models_tSNE.png">
+<br>The results of TimeGAN show lower accuracy and fidelity than the outcomes obtained in the LSTM-based models. This is to be expected as accuracy is not directly targeted in the TimeGAN model optimization as it is in the LSTM networks. GAN models are generally harder to train as we have to train two competing models at the same time. Additionally, the training process was slower limiting the number of iterations attempted. As such, there is room for improvement for TimeGAN model with longer training times or other modifications to the training process. On the other hand, TimeGAN forecasts show a much wider diversity in the produced series as shown on t-SNE plots summary, with noticeably better overlap with the original data. GAN models were able to create more variation within the forecast, whereas LSTM results were more repetitive in following central tendency.
+
+
+
+
 
 
