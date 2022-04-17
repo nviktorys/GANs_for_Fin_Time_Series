@@ -21,6 +21,6 @@ To deal with overfitting I used early stopping, dropout layers and L2 regularisa
 ### LSTM
 The key feature of LSTM is the addition of gates that control flow of information. Gates are composed of sigmoid activation functions and pointwise multiplication operator. Sigmoid function controls how much information to let through using data from the input layer and output state of the previous cell. 
 Since the input and output sequences have different length, there are two ways of how to approach it: with vector output or using encoder-decoder format. The figure below (left) illustrates vector output when the last hidden state of the LSTM layer is passed to the Dense layer, which outputs a vector of required size directly. When autoencoder is used, encoder outputs the last state of the LSTM layer which represents the encoded states of the input data. This vector is repeated to match required output dimensions and fed into decoder, Figure 11 right. Decoder then recovers the encoded states and outputs sequence into the time distributed dense layer, which produces the final set of outputs.
-<img src="../utils/LSTM_autoencoder.png"> <img src="../utils/LSTM_vector.png">
+<img src="utils/LSTM_autoencoder.png"> <img src="utils/LSTM_vector.png">
 
 
